@@ -1,95 +1,197 @@
-    @extends('layouts.app')
-    @section('content')
-        <div class="content-wrapper">
-            <div class="row">
-                <div class="col-md-12 grid-margin">
-                    <div class="row">
-                        <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">Welcome Aamir</h3>
-                            <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span
-                                    class="text-primary">3 unread alerts!</span></h6>
-                        </div>
-                        <div class="col-12 col-xl-4">
-                            <div class="justify-content-end d-flex">
-                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                                    <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button"
-                                        id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="true">
-                                        <i class="mdi mdi-calendar"></i> Today (10 Jan 2021)
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                                        <a class="dropdown-item" href="#">January - March</a>
-                                        <a class="dropdown-item" href="#">March - June</a>
-                                        <a class="dropdown-item" href="#">June - August</a>
-                                        <a class="dropdown-item" href="#">August - November</a>
-                                    </div>
+@extends('layouts.app')
+@section('content')
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <div class="row">
+                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <h3 class="font-weight-bold text-primary">Welcome Aamir</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Rumah Ipal Card -->
+            <div class="col-lg-6 col-md-12 mb-4">
+                <div class="card shadow-sm rounded-10">
+                    <div class="card-header bg-primary text-white"
+                        style=" border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                        <h5 class="mb-0"><i class="mdi mdi-water-pump mr-2 "></i> Rumah Ipal Monitoring</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="mdi mdi-cog text-primary mr-2"></i>
+                                    <span>Pompa Blower 1</span>
                                 </div>
+                                <span class="badge badge-success mr-2">ON</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="mdi mdi-cog text-primary mr-2"></i>
+                                    <span>Pompa Blower 2</span>
+                                </div>
+                                <span class="badge badge-success mr-2">ON</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="mdi mdi-test-tube text-info mr-2"></i>
+                                    <span>PH</span>
+                                </div>
+                                <span class="badge badge-info badge-pill">30 A</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="mdi mdi-water text-info mr-2"></i>
+                                    <span>Level Air</span>
+                                </div>
+                                <span class="badge badge-info badge-pill">30 A</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="mdi mdi-flash text-warning mr-2"></i>
+                                    <span>Tegangan</span>
+                                </div>
+                                <span class="badge badge-warning badge-pill">30 A</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="mdi mdi-power-plug text-success mr-2"></i>
+                                    <span>Daya</span>
+                                </div>
+                                <span class="badge badge-success badge-pill">30 A</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 grid-margin stretch-card">
-                    <div class="card tale-bg">
-                        <div class="card-people mt-auto">
-                            <img src="images/dashboard/people.svg" alt="people">
-                            <div class="weather-info">
-                                <div class="d-flex">
-                                    <div>
-                                        <h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
-                                    </div>
-                                    <div class="ml-2">
-                                        <h4 class="location font-weight-normal">Bangalore</h4>
-                                        <h6 class="font-weight-normal">India</h6>
-                                    </div>
+
+            <!-- Pump Cards -->
+            <div class="col-lg-6 col-md-12">
+                <div class="row">
+                    <!-- Pump 1 -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-left-success shadow-sm h-100">
+                            <div class="card-header bg-success text-white"
+                                style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> Pompa 1</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge badge-success mr-2">ON</span>
+                                    <small class="text-muted">Running normally</small>
                                 </div>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                        <span>Tegangan: <strong>220V</strong></span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                        <span>Daya: <strong>350W</strong></span>
+                                    </li>
+                                    <li>
+                                        <i class="mdi mdi-water mr-2 text-info"></i>
+                                        <span>Level Air: <strong>Tinggi</strong></span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-                {{-- SUMPPIT --}}
-                <div class="col-md-8 grid-margin transparent">
-                    <div class="row">
-                        <div class="col-md-4 mb-2 stretch-card transparent">
-                            <div class="card card-tale">
-                                <div class="card-body">
-                                    <p class="mb-4">Today’s Bookings</p>
-                                    <p class="fs-30 mb-2">4006</p>
-                                    <p>10.00% (30 days)</p>
-                                </div>
+
+                    <!-- Pump 2 -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-left-info shadow-sm h-100">
+                            <div
+                                class="card-header bg-info text-white"style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> Pompa 2</h6>
                             </div>
-                        </div>
-                        <div class="col-md-4 mb-2 stretch-card transparent">
-                            <div class="card card-dark-blue">
-                                <div class="card-body">
-                                    <p class="mb-4">Total Bookings</p>
-                                    <p class="fs-30 mb-2">61344</p>
-                                    <p>22.00% (30 days)</p>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge badge-success mr-2">ON</span>
+                                    <small class="text-muted">Running normally</small>
                                 </div>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                        <span>Tegangan: <strong>220V</strong></span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                        <span>Daya: <strong>350W</strong></span>
+                                    </li>
+                                    <li>
+                                        <i class="mdi mdi-water mr-2 text-info"></i>
+                                        <span>Level Air: <strong>Tinggi</strong></span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 mb-2 mb-lg-0 stretch-card transparent">
-                            <div class="card card-light-blue">
-                                <div class="card-body">
-                                    <p class="mb-4">Number of Meetings</p>
-                                    <p class="fs-30 mb-2">34040</p>
-                                    <p>2.00% (30 days)</p>
+
+                    <!-- Pump 3 -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-left-primary shadow-sm h-100">
+                            <div class="card-header bg-primary text-white"
+                                style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> Pompa 3</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge badge-success mr-2">ON</span>
+                                    <small class="text-muted">Running normally</small>
                                 </div>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                        <span>Tegangan: <strong>220V</strong></span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                        <span>Daya: <strong>350W</strong></span>
+                                    </li>
+                                    <li>
+                                        <i class="mdi mdi-water mr-2 text-info"></i>
+                                        <span>Level Air: <strong>Tinggi</strong></span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-md-4 stretch-card transparent">
-                            <div class="card card-light-danger">
-                                <div class="card-body">
-                                    <p class="mb-4">Number of Clients</p>
-                                    <p class="fs-30 mb-2">47033</p>
-                                    <p>0.22% (30 days)</p>
+                    </div>
+
+                    <!-- Pump 4 -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-left-warning shadow-sm h-100">
+                            <div class="card-header bg-warning text-dark"
+                                style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> Pompa 4</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge badge-success mr-2">ON</span>
+                                    <small class="text-muted">Running normally</small>
                                 </div>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                        <span>Tegangan: <strong>220V</strong></span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                        <span>Daya: <strong>350W</strong></span>
+                                    </li>
+                                    <li>
+                                        <i class="mdi mdi-water mr-2 text-info"></i>
+                                        <span>Level Air: <strong>Tinggi</strong></span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        @endsection
+        </div>
+    </div>
+@endsection
