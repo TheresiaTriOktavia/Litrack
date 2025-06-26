@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('tbl_device', function (Blueprint $table) {
             $table->id('id_dev');
-        $table->string('nama_dev');
-        $table->integer('status')->default(1);
-        $table->text('ket')->nullable();
+            $table->string('nama_dev');
+            $table->integer('status')->default(1);
+            $table->text('ket')->nullable();
             $table->timestamps();
         });
     }

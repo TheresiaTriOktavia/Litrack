@@ -6,7 +6,7 @@ use Illuminate\View\View;
 
 class DashboardController  
 {
-    public function dashboard(): View
+      public function dashboard(): View
     {
         return view('dashboard.index');
     } 

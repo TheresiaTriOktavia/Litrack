@@ -2,6 +2,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\LoginRegisterController;
+// use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\DeviceController;
 
 Route::controller(LoginRegisterController::class)->group(function() {
     Route::get('/register', 'register')->name('register');
@@ -18,3 +20,20 @@ Route::controller(DashboardController::class)->group(function() {
 
 });
 
+// Device Management Routes
+Route::prefix('device')->group(function () {
+    Route::get('/', [DeviceController::class, 'index'])->name('device.index');
+    Route::get('/create', [DeviceController::class, 'create'])->name('device.create');
+    Route::post('/', [DeviceController::class, 'store'])->name('device.store');
+    Route::get('/{id_dev}', [DeviceController::class, 'show'])->name('device.show');
+    Route::get('/{id_dev}/edit', [DeviceController::class, 'edit'])->name('device.edit');
+    Route::put('/{id_dev}', [DeviceController::class, 'update'])->name('device.update');
+    Route::delete('/{id_dev}', [DeviceController::class, 'destroy'])->name('device.destroy');
+});
+
+// Route::get('/data', [DeviceController::class, 'index'])->name('device.data');
+Route::get('/', function(){
+    return view('welcome');
+});
+
+Route::resource('/devices', DeviceController::class);
