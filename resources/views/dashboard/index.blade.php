@@ -13,9 +13,9 @@
 
         <div class="row">
             <!-- Rumah Ipal Card -->
-            <div class="col-lg-6 col-md-12 mb-4">
+            <div class="col-lg-5 col-md-12 mb-4">
                 <div class="card shadow-sm rounded-10">
-                    <div class="card-header bg-primary text-white"
+                    <div class="card-header bg-dark text-white"
                         style=" border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
                         <h5 class="mb-0"><i class="mdi mdi-water-pump mr-2 "></i> Rumah Ipal Monitoring</h5>
                     </div>
@@ -26,14 +26,14 @@
                                     <i class="mdi mdi-cog text-primary mr-2"></i>
                                     <span>Pompa Blower 1</span>
                                 </div>
-                                <span class="badge badge-success mr-2">ON</span>
+                                <span class="badge badge-success mr-0">ON</span>
                             </div>
                             <div class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                     <i class="mdi mdi-cog text-primary mr-2"></i>
                                     <span>Pompa Blower 2</span>
                                 </div>
-                                <span class="badge badge-success mr-2">ON</span>
+                                <span class="badge badge-success mr-0 ">ON</span>
                             </div>
                             <div class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
@@ -69,124 +69,232 @@
             </div>
 
             <!-- Pump Cards -->
-            <div class="col-lg-6 col-md-12">
+            <div class="col-lg-7 col-md-12">
                 <div class="row">
-                    <!-- Pump 1 -->
+                    <!-- SUMPPIT 1 -->
                     <div class="col-md-6 mb-4">
                         <div class="card border-left-success shadow-sm h-100">
-                            <div class="card-header bg-success text-white"
-                                style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> Pompa 1</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <span class="badge badge-success mr-2">ON</span>
-                                    <small class="text-muted">Running normally</small>
-                                </div>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="mb-2">
-                                        <i class="mdi mdi-flash mr-2 text-warning"></i>
-                                        <span>Tegangan: <strong>220V</strong></span>
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="mdi mdi-power-plug mr-2 text-primary"></i>
-                                        <span>Daya: <strong>350W</strong></span>
-                                    </li>
-                                    <li>
-                                        <i class="mdi mdi-water mr-2 text-info"></i>
-                                        <span>Level Air: <strong>Tinggi</strong></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pump 2 -->
-                    <div class="col-md-6 mb-4">
-                        <div class="card border-left-info shadow-sm h-100">
-                            <div
-                                class="card-header bg-info text-white"style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> Pompa 2</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <span class="badge badge-success mr-2">ON</span>
-                                    <small class="text-muted">Running normally</small>
-                                </div>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="mb-2">
-                                        <i class="mdi mdi-flash mr-2 text-warning"></i>
-                                        <span>Tegangan: <strong>220V</strong></span>
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="mdi mdi-power-plug mr-2 text-primary"></i>
-                                        <span>Daya: <strong>350W</strong></span>
-                                    </li>
-                                    <li>
-                                        <i class="mdi mdi-water mr-2 text-info"></i>
-                                        <span>Level Air: <strong>Tinggi</strong></span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pump 3 -->
-                    <div class="col-md-6 mb-4">
-                        <div class="card border-left-primary shadow-sm h-100">
                             <div class="card-header bg-primary text-white"
                                 style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> Pompa 3</h6>
+                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> SUMPPIT 1</h6>
                             </div>
                             <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <span class="badge badge-success mr-2">ON</span>
-                                    <small class="text-muted">Running normally</small>
+                                <div class="row">
+                                    <!-- Pompa 1 -->
+                                    <div class="col-md-6 border-right">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="badge badge-success mr-2">ON</span>
+                                            <small class="text-muted">POMPA 1</small>
+                                        </div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                                <span>Tegangan: <strong>220V</strong></span>
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                                <span>Daya: <strong>350W</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="mdi mdi-water mr-2 text-info"></i>
+                                                <span>Level Air: <strong>Tinggi</strong></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Pompa 2 -->
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="badge badge-success mr-2">ON</span>
+                                            <small class="text-muted">POMPA 2</small>
+                                        </div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                                <span>Tegangan: <strong>220V</strong></span>
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                                <span>Daya: <strong>350W</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="mdi mdi-water mr-2 text-info"></i>
+                                                <span>Level Air: <strong>Tinggi</strong></span>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="mb-2">
-                                        <i class="mdi mdi-flash mr-2 text-warning"></i>
-                                        <span>Tegangan: <strong>220V</strong></span>
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="mdi mdi-power-plug mr-2 text-primary"></i>
-                                        <span>Daya: <strong>350W</strong></span>
-                                    </li>
-                                    <li>
-                                        <i class="mdi mdi-water mr-2 text-info"></i>
-                                        <span>Level Air: <strong>Tinggi</strong></span>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Pump 4 -->
+                    <!-- SUMPPIT 2 -->
                     <div class="col-md-6 mb-4">
-                        <div class="card border-left-warning shadow-sm h-100">
-                            <div class="card-header bg-warning text-dark"
+                        <div class="card border-left-success shadow-sm h-100">
+                            <div class="card-header bg-info text-white"
                                 style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> Pompa 4</h6>
+                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> SUMPPIT 2</h6>
                             </div>
                             <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <span class="badge badge-success mr-2">ON</span>
-                                    <small class="text-muted">Running normally</small>
+                                <div class="row">
+                                    <!-- Pompa 1 -->
+                                    <div class="col-md-6 border-right">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="badge badge-success mr-2">ON</span>
+                                            <small class="text-muted">POMPA 1</small>
+                                        </div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                                <span>Tegangan: <strong>220V</strong></span>
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                                <span>Daya: <strong>350W</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="mdi mdi-water mr-2 text-info"></i>
+                                                <span>Level Air: <strong>Tinggi</strong></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Pompa 2 -->
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="badge badge-success mr-2">ON</span>
+                                            <small class="text-muted">POMPA 2</small>
+                                        </div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                                <span>Tegangan: <strong>220V</strong></span>
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                                <span>Daya: <strong>350W</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="mdi mdi-water mr-2 text-info"></i>
+                                                <span>Level Air: <strong>Tinggi</strong></span>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="mb-2">
-                                        <i class="mdi mdi-flash mr-2 text-warning"></i>
-                                        <span>Tegangan: <strong>220V</strong></span>
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="mdi mdi-power-plug mr-2 text-primary"></i>
-                                        <span>Daya: <strong>350W</strong></span>
-                                    </li>
-                                    <li>
-                                        <i class="mdi mdi-water mr-2 text-info"></i>
-                                        <span>Level Air: <strong>Tinggi</strong></span>
-                                    </li>
-                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUMPPIT 3 -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-left-success shadow-sm h-100">
+                            <div class="card-header bg-warning text-white"
+                                style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> SUMPPIT 3</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- Pompa 1 -->
+                                    <div class="col-md-6 border-right">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="badge badge-success mr-2">ON</span>
+                                            <small class="text-muted">POMPA 1</small>
+                                        </div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                                <span>Tegangan: <strong>220V</strong></span>
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                                <span>Daya: <strong>350W</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="mdi mdi-water mr-2 text-info"></i>
+                                                <span>Level Air: <strong>Tinggi</strong></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Pompa 2 -->
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="badge badge-success mr-2">ON</span>
+                                            <small class="text-muted">POMPA 2</small>
+                                        </div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                                <span>Tegangan: <strong>220V</strong></span>
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                                <span>Daya: <strong>350W</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="mdi mdi-water mr-2 text-info"></i>
+                                                <span>Level Air: <strong>Tinggi</strong></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUMPPIT 4 -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-left-success shadow-sm h-100">
+                            <div class="card-header bg-danger text-white"
+                                style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                                <h6 class="mb-0"><i class="mdi mdi-water-pump mr-2"></i> SUMPPIT 4</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- Pompa 1 -->
+                                    <div class="col-md-6 border-right">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="badge badge-success mr-2">ON</span>
+                                            <small class="text-muted">POMPA 1</small>
+                                        </div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                                <span>Tegangan: <strong>220V</strong></span>
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                                <span>Daya: <strong>350W</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="mdi mdi-water mr-2 text-info"></i>
+                                                <span>Level Air: <strong>Tinggi</strong></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Pompa 2 -->
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="badge badge-success mr-2">ON</span>
+                                            <small class="text-muted">POMPA 2</small>
+                                        </div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-flash mr-2 text-warning"></i>
+                                                <span>Tegangan: <strong>220V</strong></span>
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="mdi mdi-power-plug mr-2 text-primary"></i>
+                                                <span>Daya: <strong>350W</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="mdi mdi-water mr-2 text-info"></i>
+                                                <span>Level Air: <strong>Tinggi</strong></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
