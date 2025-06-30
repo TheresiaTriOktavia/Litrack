@@ -11,6 +11,7 @@ class Device extends Model
 
     protected $table = 'tbl_device';
     protected $primaryKey = 'id_dev';
+    
     // protected $timestamps;
 
 
@@ -24,5 +25,8 @@ class Device extends Model
         'status' => 'boolean',
     ];
 
-    
+    // public function newcode(
+    //    $last = self:: latest ('id_dev')->first()
+    // )
+
 }

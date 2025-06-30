@@ -20,7 +20,7 @@ Route::controller(DashboardController::class)->group(function() {
 
 });
 
-// Device Management Routes
+// // Device Management Routes
 Route::prefix('device')->group(function () {
     Route::get('/', [DeviceController::class, 'index'])->name('device.index');
     Route::get('/create', [DeviceController::class, 'create'])->name('device.create');
@@ -36,4 +36,8 @@ Route::get('/', function(){
     return view('welcome');
 });
 
-Route::resource('/devices', DeviceController::class);
+// Route::controller(DeviceController::class)->group(function(){
+//     Route::post('/device/create', 'addDevice');
+// });
+
+// Route::resource('/devices',  [DeviceController::class, 'index'])->name('device.index');
