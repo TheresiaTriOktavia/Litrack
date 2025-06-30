@@ -7,6 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>LiTrack</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('formDevice').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = {
+            nama_dev: document.getElementById('nama_dev').value,
+            status: document.getElementById('status').value,
+            ket: document.getElementById('ket').value
+            };
+
+            fetch('/api/device/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+            })
+            .then(res => res.json())
+            .then(data => {
+            alert('Data berhasil disimpan');
+            location.reload(); // atau update list device
+            })
+            .catch(err => {
+            console.error(err);
+            alert('Gagal menyimpan data');
+            });
+        });
+    </script>
+
     <!-- plugins:css -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
      <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
@@ -96,6 +125,8 @@
     <!-- Custom js for this page-->
     <script src="{{ asset('apaya/js/dashboard.js') }}"></script>
     <script src="{{ asset('apaya/js/Chart.roundedBarCharts.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- End custom js for this page-->
 </body>
 
