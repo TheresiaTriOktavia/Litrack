@@ -16,25 +16,23 @@
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="device-management">
-                <ul class="nav flex-column sub-menu">
+                <ul class="nav flex-column sub-menu list-unstyled">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('device.index') }}">
-                            <i class="mdi mdi-format-list-bulleted mr-2"></i>
-                            All Devices
+                            All Device
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('device.create') }}">
-                            <i class="mdi mdi-plus-circle mr-2"></i>
-                            Add New Device
+                            Registered Device
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         {{-- <a class="nav-link" href="{{ route('device.data') }}">
                             <i class="mdi mdi-chart-bar mr-2"></i>
                             Device Data
                         </a> --}}
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </li>

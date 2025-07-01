@@ -43,6 +43,8 @@ class DeviceController extends Controller
         // Redirect kembali ke halaman index dengan flash message sukses
         return redirect()->route('device.index')->with('success', 'Data device berhasil disimpan.');
     }
+
+    
 }
 
 // 1. sweet alert 

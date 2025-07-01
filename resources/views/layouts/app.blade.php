@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>LiTrack</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script>
+    <!-- <script>
         document.getElementById('formDevice').addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -34,7 +34,7 @@
             alert('Gagal menyimpan data');
             });
         });
-    </script>
+    </script> -->
 
     <!-- plugins:css -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -54,6 +54,8 @@
     <link rel="stylesheet" href="{{ asset('apaya/css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
     {{-- <link rel="shortcut icon" href="images/favicon.png" /> --}}
+    <link href="https://cdn.materialdesignicons.com/7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -92,7 +94,7 @@
             <!-- partial:partials/_sidebar.html -->
 
             {{-- LOKASI SIDEBAR BRO --}}
-            @include('shared.sidebar')
+            @include('layouts.sidebar')
             <!-- partial -->
             <div class="main-panel">
                 @yield('content')
