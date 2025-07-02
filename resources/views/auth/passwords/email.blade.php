@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Forgot Password - Litrack</title>
@@ -22,7 +23,7 @@
             background: #fff;
             padding: 2rem;
             border-radius: 1rem;
-            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
         }
 
         .title {
@@ -60,7 +61,7 @@
         input[type="email"]:focus {
             outline: none;
             border-color: #6366F1;
-            box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
         }
 
         .btn {
@@ -114,20 +115,20 @@
         a:hover {
             text-decoration: underline;
         }
-
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="title">Forgot Password</div>
         <p class="subtitle">Enter your email and we'll send you a reset link.</p>
 
-    @if (session('status'))
-        <div class="alert-success">
-            <strong>Simulasi:</strong> klik link berikut untuk reset password:
-            <div class="reset-link">{!! session('status') !!}</div>
-        </div>
-    @endif
+        @if (session('status'))
+            <div class="alert-success">
+                <strong>Simulasi:</strong> klik link berikut untuk reset password:
+                <div class="reset-link">{!! session('status') !!}</div>
+            </div>
+        @endif
 
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
@@ -147,4 +148,5 @@
         </div>
     </div>
 </body>
+
 </html>

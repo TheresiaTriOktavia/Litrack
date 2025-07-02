@@ -1,166 +1,245 @@
 @extends('layouts.app')
-@section('content')
-<div class="content-wrapper">
-    <div class="row">
-        <div class="col-md-12 grid-margin">
-            <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                    <h3 class="font-weight-bold text-primary">Device Management</h3>
-                </div>
-                <div class="col-12 col-xl-4 text-end">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        <i class="fa-solid fa-circle-plus"></i> Add Device
-                    </button>
 
-                    <!-- Modal Tambah Device -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-md">
-                            <form action="{{ route('device.store') }}" method="post" id="deviceForm">
-                                @csrf
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5">Add New Device</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control form-control-sm" id="nama_dev" name="nama_dev" placeholder="Device Name">
-                                            <label for="nama_dev">Device Name</label>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control form-control-sm" id="status" name="status" placeholder="Status">
-                                            <label for="status">Status</label>
-                                        </div>
-                                        <div class="form-floating">
-                                            <textarea class="form-control form-control-sm" placeholder="Keterangan" id="ket" name="ket"></textarea>
-                                            <label for="ket">Keterangan</label>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" id="submitDeviceBtn">Save Device</button>
+@section('content')
+    <div class="content-wrapper">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h3 class="font-weight-bold text-primary">Device Management</h3>
+            </div>
+            <div class="col-md-4 text-end">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deviceModal">
+                    <i class="fa-solid fa-circle-plus"></i> Add Device
+                </button>
+            </div>
+        </div>
+
+        @if (session('success'))
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        text: '{{ session('success') }}',
+                        icon: 'success',
+                        iconColor: '#198754',
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'rounded-4 shadow-sm p-3',
+                            confirmButton: 'btn btn-success px-4'
+                        },
+                        buttonsStyling: false
+                    });
+                });
+            </script>
+        @endif
+
+        {{-- Modal Tambah Device --}}
+        <div class="modal fade" id="deviceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="deviceModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content rounded-3">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deviceModalLabel">Add Device</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('device.store') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                <input type="text" id="nama_dev" name="nama_dev"
+                                    class="form-control form-control-sm @error('nama_dev') is-invalid @enderror"
+                                    placeholder="Nama Device" value="{{ old('nama_dev') }}">
+                                <label for="nama_dev">Nama Device</label>
+                                @error('nama_dev')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select id="status" name="status"
+                                    class="form-select @error('status') is-invalid @enderror">
+                                    <option value="" disabled {{ old('status') === null ? 'selected' : '' }}>-- Pilih
+                                        Status --</option>
+                                    <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>ON</option>
+                                    <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>OFF</option>
+                                </select>
+                                <label for="status">Status</label>
+                                @error('status')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea id="ket" name="ket" class="form-control @error('ket') is-invalid @enderror"
+                                    placeholder="Keterangan..." style="height: 100px">{{ old('ket') }}</textarea>
+                                <label for="ket">Keterangan</label>
+                                @error('ket')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {{-- Modal View & Edit --}}
+        @foreach ($device as $d)
+            <div class="modal fade" id="viewModal-{{ $d->id_dev }}" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-md modal-dialog-centered">
+                    <div class="modal-content rounded-4">
+                        <div class="modal-body position-relative p-0">
+                            <button type="button"
+                                class="btn btn-light position-absolute top-0 end-0 m-2 shadow-sm rounded-circle"
+                                data-bs-dismiss="modal"><i class="fa-solid fa-xmark fs-5 text-dark"></i></button>
+                            <div class="card border-0 shadow-sm">
+                                <img src="{{ asset('img/logo.png') }}" class="card-img-top"
+                                    style="max-height:180px; object-fit:contain; padding:1rem;">
+                                <div class="card-body px-4 pt-2 pb-4">
+                                    <h5 class="card-title fw-bold">{{ $d->nama_dev }}</h5>
+                                    <p class="card-text mb-2 text-wrap">{{ $d->ket }}</p>
+                                    <p class="card-text"><small class="text-muted">{{ $d->status ? 'ON' : 'OFF' }}</small>
+                                    </p>
+                                    <div class="text-end mt-3">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                    <!-- End Modal -->
+                </div>
+            </div>
+            <div class="modal fade" id="editModal-{{ $d->id_dev }}" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content rounded-3">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Device</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('device.update', $d->id_dev) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-body">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="nama_dev" class="form-control"
+                                        value="{{ $d->nama_dev }}">
+                                    <label>Nama Device</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select name="status" class="form-select">
+                                        <option value="1" {{ $d->status ? 'selected' : '' }}>ON</option>
+                                        <option value="0" {{ !$d->status ? 'selected' : '' }}>OFF</option>
+                                    </select>
+                                    <label>Status</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <textarea name="ket" class="form-control" style="height:100px">{{ $d->ket }}</textarea>
+                                    <label>Keterangan</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button class="btn btn-success" type="submit">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+        <div class="card shadow-sm rounded-3 mt-3">
+            <div class="card-header bg-dark text-white rounded-top">
+                <h5 class="mb-0"><i class="mdi mdi-devices me-2"></i> Device List</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive px-4">
+                    <table class="table table-hover align-middle w-100">
+                        <thead class="align-middle">
+                            <tr>
+                                <th class="text-center" style="width: 5%;">No</th>
+                                <th style="width: 25%;">Device Name</th>
+                                <th style="width: 15%;">Status</th>
+                                <th style="width: 40%;">Description</th>
+                                <th class="text-center" style="width: 15%;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($device as $index => $d)
+                                <tr>
+                                    <td class="text-center">{{ $index + $device->firstItem() }}</td>
+                                    <td>{{ $d->nama_dev }}</td>
+                                    <td>{{ $d->status == 1 ? 'ON' : 'OFF' }}</td>
+                                    <td class="text-wrap" style="max-width: 250px;">{{ $d->ket }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal"
+                                            data-bs-target="#viewModal-{{ $d->id_dev }}">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal"
+                                            data-bs-target="#editModal-{{ $d->id_dev }}">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger"
+                                            onclick="confirmDelete({{ $d->id_dev }})">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center text-danger">Data Kosong</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    {!! $device->links('pagination::bootstrap-5') !!}
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Card List -->
-    <div class="card shadow-sm rounded-10">
-        <div class="card-header bg-dark text-white"
-            style="border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-            <h5 class="mb-0"><i class="mdi mdi-devices mr-2"></i> Device List</h5>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Device Name</th>
-                            <th>Status</th>
-                            <th>Description</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($device as $aku)
-                        <tr>
-                            <td>{{ ++$i }}</td>
-                            <td>{{ $aku->nama_dev }}</td>
-                            <td>{{ $aku->status }}</td>
-                            <td>{{ $aku->ket }}</td>
-                            <td>--</td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="5" class="text-center text-danger">Data Kosong Boyyy</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-                {!! $device->links() !!}
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-
-@push('scripts')
-<script>
-    document.getElementById('submitDeviceBtn').addEventListener('click', function () {
-        const namaDev = document.getElementById('nama_dev').value.trim();
-        const status = document.getElementById('status').value.trim();
-        const ket = document.getElementById('ket').value.trim();
-
-        if (!namaDev || !status || !ket) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Data Belum Terisi!',
-                text: 'Gagal Di Simpan BOIII!',
-                showConfirmButton: true
+    @if ($errors->any())
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var myModal = new bootstrap.Modal(document.getElementById('deviceModal'));
+                myModal.show();
             });
-            return;
+        </script>
+    @endif
+
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Yakin?',
+                text: 'Device akan dihapus secara permanen!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    confirmButton: 'btn btn-danger mx-2',
+                    cancelButton: 'btn btn-secondary'
+                },
+                buttonsStyling: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                focusConfirm: false,
+                focusCancel: false
+            }).then((res) => {
+                if (res.isConfirmed) {
+                    let form = document.createElement('form');
+                    form.action = `/device/${id}`;
+                    form.method = 'POST';
+                    form.innerHTML = '@csrf @method('DELETE')';
+                    document.body.append(form);
+                    form.submit();
+                }
+            });
         }
-
-        Swal.fire({
-            title: 'Simpan Device?',
-            text: "Mau Di Simpan BOIII!",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, simpan!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Menyimpan...',
-                    text: 'Tunggu sebentar...',
-                    icon: 'info',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
-
-                setTimeout(() => {
-                    document.getElementById('deviceForm').submit();
-                }, 1500);
-            }
-        });
-    });
-</script>
-
-{{-- @if (session('success'))
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Berhasil BOIII!',
-        text: '{{ session('success') }}',
-        showConfirmButton: false,
-        timer: 2000
-    });
-</script>
-@endif
-
-@if (session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Gagal BOIII!',
-        text: '{{ session('error') }}',
-        showConfirmButton: false,
-        timer: 2000
-    });
-</script> --}}
-{{-- @endif --}}
-@endpush
+    </script>
+@endsection

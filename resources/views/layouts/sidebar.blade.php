@@ -19,14 +19,12 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('device.index') }}">
-                            <i class="mdi mdi-format-list-bulleted mr-2"></i>
                             All Devices
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('device.create') }}">
-                            <i class="mdi mdi-plus-circle mr-2"></i>
-                            Add New Device
+                        <a class="nav-link" href="{{ route('regdev.index') }}">
+                            Registered Device
                         </a>
                     </li>
                     <li class="nav-item">

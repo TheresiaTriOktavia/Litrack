@@ -1,43 +1,66 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\LoginRegisterController;
-// use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\DeviceController;
-
-Route::controller(LoginRegisterController::class)->group(function() {
+use App\Http\Controllers\RegDevController;
+/*
+|--------------------------------------------------------------------------
+| AUTH Routes (Login & Register)
+|--------------------------------------------------------------------------
+*/
+Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
+   
     Route::get('/login', 'login')->name('login');
     Route::post('/authenticate', 'authenticate')->name('authenticate');
+    
+    Route::get('/home', 'home')->name('home');
     Route::post('/logout', 'logout')->name('logout');
-
 });
+// Forgot password form
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
 
-Route::controller(DashboardController::class)->group(function() {
+// Reset password form
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+/*
+|--------------------------------------------------------------------------
+| DASHBOARD Routes
+|--------------------------------------------------------------------------
+*/
+Route::controller(DashboardController::class)->group(function () {
     Route::get('/', 'dashboard')->name('dashboard');
-    Route::get('/dashboard', 'dashboard')->name('dashboard');
-
+    Route::get('/dashboard', 'dashboard');
 });
 
-// // Device Management Routes
+/*
+|--------------------------------------------------------------------------
+| DEVICE MANAGEMENT Routes
+|--------------------------------------------------------------------------
+*/
 Route::prefix('device')->group(function () {
     Route::get('/', [DeviceController::class, 'index'])->name('device.index');
     Route::get('/create', [DeviceController::class, 'create'])->name('device.create');
     Route::post('/', [DeviceController::class, 'store'])->name('device.store');
     Route::get('/{id_dev}', [DeviceController::class, 'show'])->name('device.show');
-    Route::get('/{id_dev}/edit', [DeviceController::class, 'edit'])->name('device.edit');
     Route::put('/{id_dev}', [DeviceController::class, 'update'])->name('device.update');
     Route::delete('/{id_dev}', [DeviceController::class, 'destroy'])->name('device.destroy');
 });
 
-// Route::get('/data', [DeviceController::class, 'index'])->name('device.data');
-Route::get('/', function(){
+/*
+|--------------------------------------------------------------------------
+| WELCOME Default View
+|--------------------------------------------------------------------------
+*/
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
-// Route::controller(DeviceController::class)->group(function(){
-//     Route::post('/device/create', 'addDevice');
-// });
-
-// Route::resource('/devices',  [DeviceController::class, 'index'])->name('device.index');
+Route::get('/register-device', [RegDevController::class, 'index'])->name('regdev.index');
+Route::post('/register-device', [RegDevController::class, 'store'])->name('regdev.store');
