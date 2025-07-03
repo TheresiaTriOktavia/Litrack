@@ -70,3 +70,4 @@ Route::put('/register-device/{id_rd}', [RegDevController::class, 'update'])->nam
 Route::delete('/register-device/{id_rd}', [RegDevController::class, 'destroy'])->name('regdev.destroy');
 Route::get('/register-device/{id_rd}', [RegDevController::class, 'show'])->name('regdev.show');
 
+
