@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\RegDevController;
+use App\Http\Controllers\LocationController;
+
 /*
 |--------------------------------------------------------------------------
 | AUTH Routes (Login & Register)
@@ -70,4 +72,14 @@ Route::put('/register-device/{id_rd}', [RegDevController::class, 'update'])->nam
 Route::delete('/register-device/{id_rd}', [RegDevController::class, 'destroy'])->name('regdev.destroy');
 Route::get('/register-device/{id_rd}', [RegDevController::class, 'show'])->name('regdev.show');
 
-
+/*
+|--------------------------------------------------------------------------
+| Location Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('location')->group(function () {
+    Route::get('/', [LocationController::class, 'index'])->name('location.index');
+    Route::post('/', [LocationController::class, 'store'])->name('location.store');
+    Route::put('/{id_lok}', [LocationController::class, 'update'])->name('location.update');
+    Route::delete('/{id_lok}', [LocationController::class, 'destroy'])->name('location.destroy');
+});
