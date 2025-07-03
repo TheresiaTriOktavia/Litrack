@@ -16,6 +16,7 @@ class RegDev extends Model
 
     protected $fillable = [
         'nama_rd',
+        'id_regDev',
         'id_dev',
         'id_ipal',
         'id_lok',
