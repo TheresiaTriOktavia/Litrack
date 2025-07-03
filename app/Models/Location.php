@@ -32,4 +32,6 @@ class Location extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    
 }

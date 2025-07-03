@@ -23,6 +23,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('ipal.index') }}">
+                            IPAL
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('location.index') }}">
                             Location
                         </a>
