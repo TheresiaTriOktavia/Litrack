@@ -150,9 +150,9 @@
                 <h5 class="mb-0"><i class="mdi mdi-devices me-2"></i> List Registered Devices</h5>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped align-middle">
-                        <thead>
+                <div class="table-responsive px-4">
+                    <table class="table table-hover align-middle w-100">
+                        <thead class="align-middle">
                             <tr>
                                 <th>No</th>
                                 <th>Nama Register</th>
@@ -161,6 +161,7 @@
                                 <th>Lokasi</th>
                                 <th>Status</th>
                                 <th>Keterangan</th>
+                                <th class="text-center" style="width: 15%;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -173,12 +174,108 @@
                                     <td>{{ $d->lokasi->nama_lok ?? '-' }}</td>
                                     <td>{{ $d->status ? 'ON' : 'OFF' }}</td>
                                     <td>{{ $d->ket }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal"
+                                            data-bs-target="#viewRegdevModal-{{ $d->id_rd }}">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-warning me-1" data-bs-toggle="modal"
+                                            data-bs-target="#editRegdevModal-{{ $d->id_rd }}">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger"
+                                            onclick="confirmRegdevDelete({{ $d->id_rd }}, '{{ csrf_token() }}')">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center text-danger">Data Kosong</td>
+                                    <td colspan="8" class="text-center text-danger">Data Kosong</td>
                                 </tr>
                             @endforelse
+                            @foreach ($regdev as $d)
+                                {{-- Modal View --}}
+                                <div class="modal fade" id="viewRegdevModal-{{ $d->id_rd }}"
+                                    data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <div class="modal-content rounded-4">
+                                            <div class="modal-body position-relative p-0">
+                                                <button type="button"
+                                                    class="btn btn-light position-absolute top-0 end-0 m-2 shadow-sm rounded-circle"
+                                                    data-bs-dismiss="modal">
+                                                    <i class="fa-solid fa-xmark fs-5 text-dark"></i>
+                                                </button>
+                                                <div class="card border-0 shadow-sm">
+                                                    <div class="card-body px-4 pt-4 pb-4">
+                                                        <h5 class="card-title fw-bold mb-2">{{ $d->nama_rd }}</h5>
+                                                        <p class="mb-1"><strong>Device:</strong>
+                                                            {{ $d->device->nama_dev ?? '-' }}</p>
+                                                        <p class="mb-1"><strong>IPAL:</strong>
+                                                            {{ $d->ipal->nama ?? '-' }}</p>
+                                                        <p class="mb-1"><strong>Lokasi:</strong>
+                                                            {{ $d->lokasi->nama_lok ?? '-' }}</p>
+                                                        <p class="mb-1"><strong>Status:</strong>
+                                                            {{ $d->status ? 'ON' : 'OFF' }}</p>
+                                                        <p class="mb-1"><strong>Keterangan:</strong> {{ $d->ket }}
+                                                        </p>
+                                                        <div class="text-end mt-3">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Modal Edit --}}
+                                <div class="modal fade" id="editRegdevModal-{{ $d->id_rd }}"
+                                    data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-md">
+                                        <div class="modal-content rounded-3">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit Registered Device</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ route('regdev.update', $d->id_rd) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-body">
+                                                    <div class="form-floating mb-3">
+                                                        <input type="text" name="nama_rd" class="form-control"
+                                                            value="{{ $d->nama_rd }}">
+                                                        <label>Nama Register Device</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <select name="status" class="form-select">
+                                                            <option value="1" {{ $d->status ? 'selected' : '' }}>ON
+                                                            </option>
+                                                            <option value="0" {{ !$d->status ? 'selected' : '' }}>OFF
+                                                            </option>
+                                                        </select>
+                                                        <label>Status</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <textarea name="ket" class="form-control" style="height:100px">{{ $d->ket }}</textarea>
+                                                        <label>Keterangan</label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button class="btn btn-success" type="submit">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
                         </tbody>
                     </table>
                     {!! $regdev->links() !!}
@@ -196,4 +293,34 @@
             });
         </script>
     @endif
+    <script>
+        function confirmRegdevDelete(id) {
+            Swal.fire({
+                title: 'Yakin?',
+                text: 'Data akan dihapus permanen!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    confirmButton: 'btn btn-danger mx-2',
+                    cancelButton: 'btn btn-secondary'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let form = document.createElement('form');
+                    form.action = `/regdev/${id}`;
+                    form.method = 'POST';
+                    form.innerHTML = `
+                <input type="hidden" name="_token" value="${token}">
+                <input type="hidden" name="_method" value="DELETE">
+            `;
+
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
+        }
+    </script>
 @endsection

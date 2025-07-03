@@ -56,4 +56,13 @@ class RegDevController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('regdev.index')->with('success', 'Register device berhasil disimpan.');
     }
+
+    public function destroy($id_rd)
+{
+    $regdev = RegDev::findOrFail($id_rd);
+    $regdev->delete();
+
+    return redirect()->route('regdev.index')->with('success', 'Data berhasil dihapus!');
+}
+
 }

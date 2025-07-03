@@ -62,5 +62,11 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+
+// Registered Device
 Route::get('/register-device', [RegDevController::class, 'index'])->name('regdev.index');
 Route::post('/register-device', [RegDevController::class, 'store'])->name('regdev.store');
+Route::put('/register-device/{id_rd}', [RegDevController::class, 'update'])->name('regdev.update');
+Route::delete('/register-device/{id_rd}', [RegDevController::class, 'destroy'])->name('regdev.destroy');
+Route::get('/register-device/{id_rd}', [RegDevController::class, 'show'])->name('regdev.show');
+
