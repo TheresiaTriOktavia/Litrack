@@ -155,6 +155,7 @@
                         <thead class="align-middle">
                             <tr>
                                 <th>No</th>
+                                <th>ID RegDev</th> <!-- Tambahan -->
                                 <th>Nama Register</th>
                                 <th>Device</th>
                                 <th>IPAL</th>
@@ -168,6 +169,7 @@
                             @forelse ($regdev as $i => $d)
                                 <tr>
                                     <td>{{ $i + $regdev->firstItem() }}</td>
+                                    <td>{{ $d->id_regDev }}</td> <!-- Tambahan -->
                                     <td>{{ $d->nama_rd }}</td>
                                     <td>{{ $d->device->nama_dev ?? '-' }}</td>
                                     <td>{{ $d->ipal->nama ?? '-' }}</td>
@@ -208,6 +210,8 @@
                                                     <i class="fa-solid fa-xmark fs-5 text-dark"></i>
                                                 </button>
                                                 <div class="card border-0 shadow-sm">
+                                                    <img src="{{ asset('img/logo.png') }}" class="card-img-top"
+                                                        style="max-height:180px; object-fit:contain; padding:1rem;">
                                                     <div class="card-body px-4 pt-4 pb-4">
                                                         <h5 class="card-title fw-bold mb-2">{{ $d->nama_rd }}</h5>
                                                         <p class="mb-1"><strong>Device:</strong>
@@ -232,6 +236,7 @@
                                 </div>
 
                                 {{-- Modal Edit --}}
+                                {{-- Modal Edit --}}
                                 <div class="modal fade" id="editRegdevModal-{{ $d->id_rd }}"
                                     data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                                     aria-hidden="true">
@@ -246,20 +251,64 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-body">
+                                                    {{-- Nama --}}
                                                     <div class="form-floating mb-3">
                                                         <input type="text" name="nama_rd" class="form-control"
                                                             value="{{ $d->nama_rd }}">
                                                         <label>Nama Register Device</label>
                                                     </div>
+
+                                                    {{-- Device --}}
+                                                    <div class="form-floating mb-3">
+                                                        <select name="id_dev" class="form-select">
+                                                            @foreach ($devices as $dev)
+                                                                <option value="{{ $dev->id_dev }}"
+                                                                    {{ $d->id_dev == $dev->id_dev ? 'selected' : '' }}>
+                                                                    {{ $dev->nama_dev }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        <label>Device</label>
+                                                    </div>
+
+                                                    {{-- IPAL --}}
+                                                    <div class="form-floating mb-3">
+                                                        <select name="id_ipal" class="form-select">
+                                                            @foreach ($ipals as $ipal)
+                                                                <option value="{{ $ipal->id_ipal }}"
+                                                                    {{ $d->id_ipal == $ipal->id_ipal ? 'selected' : '' }}>
+                                                                    {{ $ipal->nama }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        <label>IPAL</label>
+                                                    </div>
+
+                                                    {{-- Lokasi --}}
+                                                    <div class="form-floating mb-3">
+                                                        <select name="id_lok" class="form-select">
+                                                            @foreach ($lokasis as $lok)
+                                                                <option value="{{ $lok->id_lok }}"
+                                                                    {{ $d->id_lok == $lok->id_lok ? 'selected' : '' }}>
+                                                                    {{ $lok->nama_lok }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        <label>Lokasi</label>
+                                                    </div>
+
+                                                    {{-- Status --}}
                                                     <div class="form-floating mb-3">
                                                         <select name="status" class="form-select">
-                                                            <option value="1" {{ $d->status ? 'selected' : '' }}>ON
-                                                            </option>
-                                                            <option value="0" {{ !$d->status ? 'selected' : '' }}>OFF
-                                                            </option>
+                                                            <option value="1"
+                                                                {{ $d->status == 1 ? 'selected' : '' }}>ON</option>
+                                                            <option value="0"
+                                                                {{ $d->status == 0 ? 'selected' : '' }}>OFF</option>
                                                         </select>
                                                         <label>Status</label>
                                                     </div>
+
+                                                    {{-- Keterangan --}}
                                                     <div class="form-floating mb-3">
                                                         <textarea name="ket" class="form-control" style="height:100px">{{ $d->ket }}</textarea>
                                                         <label>Keterangan</label>
@@ -278,7 +327,7 @@
 
                         </tbody>
                     </table>
-                    {!! $regdev->links() !!}
+                    {!! $regdev->links('pagination::bootstrap-5') !!}
                 </div>
             </div>
         </div>
@@ -294,7 +343,7 @@
         </script>
     @endif
     <script>
-        function confirmRegdevDelete(id) {
+        function confirmRegdevDelete(id, token) {
             Swal.fire({
                 title: 'Yakin?',
                 text: 'Data akan dihapus permanen!',
@@ -310,13 +359,12 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     let form = document.createElement('form');
-                    form.action = `/regdev/${id}`;
+                    form.action = `/register-device/${id}`; // <- PERBAIKI INI
                     form.method = 'POST';
                     form.innerHTML = `
                 <input type="hidden" name="_token" value="${token}">
                 <input type="hidden" name="_method" value="DELETE">
             `;
-
                     document.body.appendChild(form);
                     form.submit();
                 }
@@ -324,4 +372,3 @@
         }
     </script>
 @endsection
-
