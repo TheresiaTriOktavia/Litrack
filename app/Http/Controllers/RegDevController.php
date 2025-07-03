@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RegDev;
 use App\Models\Device;
 use App\Models\IPAL;
-use App\Models\Lokasi;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -19,8 +19,8 @@ class RegDevController extends Controller
     {
         $regdev = RegDev::with(['device', 'ipal', 'lokasi'])->latest()->paginate(5);
         $devices = Device::all();
-        $ipals = IPAL::all();
-        $lokasis = Lokasi::all();
+        $ipals = Ipal::all();
+        $lokasis = Location::all();
 
         return view('regdev.registered', compact('regdev', 'devices', 'ipals', 'lokasis'))
             ->with('i', (request()->input('page', 1) - 1) * 5);

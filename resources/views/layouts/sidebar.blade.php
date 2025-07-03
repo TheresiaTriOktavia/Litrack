@@ -23,15 +23,19 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('regdev.index') }}">
-                            Registered Device
+                        <a class="nav-link" href="{{ route('ipal.index') }}">
+                            IPAL
                         </a>
                     </li>
                     <li class="nav-item">
-                        {{-- <a class="nav-link" href="{{ route('device.data') }}">
-                            <i class="mdi mdi-chart-bar mr-2"></i>
-                            Device Data
-                        </a> --}}
+                        <a class="nav-link" href="{{ route('location.index') }}">
+                            Location
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="{{ route('regdev.index') }}">
+                            Registered Device
+                        </a>
                     </li>
                 </ul>
             </div>

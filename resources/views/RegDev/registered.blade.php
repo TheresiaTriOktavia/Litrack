@@ -101,7 +101,7 @@
                                     @foreach ($lokasis as $lokasi)
                                         <option value="{{ $lokasi->id_lok }}"
                                             {{ old('id_lok') == $lokasi->id_lok ? 'selected' : '' }}>
-                                            {{ $lokasi->nama_lok }}
+                                            {{ $lokasi->nama }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -173,9 +173,9 @@
                                     <td>{{ $d->nama_rd }}</td>
                                     <td>{{ $d->device->nama_dev ?? '-' }}</td>
                                     <td>{{ $d->ipal->nama ?? '-' }}</td>
-                                    <td>{{ $d->lokasi->nama_lok ?? '-' }}</td>
+                                    <td>{{ $d->lokasi->nama ?? '-' }}</td>
                                     <td>{{ $d->status ? 'ON' : 'OFF' }}</td>
-                                    <td>{{ $d->ket }}</td>
+                                    <td class="text-wrap" style="max-width: 250px;">{{ $d->ket }}</td>
                                     <td class="text-center">
                                         <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal"
                                             data-bs-target="#viewRegdevModal-{{ $d->id_rd }}">
@@ -199,43 +199,54 @@
                             @foreach ($regdev as $d)
                                 {{-- Modal View --}}
                                 <div class="modal fade" id="viewRegdevModal-{{ $d->id_rd }}"
-                                    data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-md modal-dialog-centered">
-                                        <div class="modal-content rounded-4">
-                                            <div class="modal-body position-relative p-0">
-                                                <button type="button"
-                                                    class="btn btn-light position-absolute top-0 end-0 m-2 shadow-sm rounded-circle"
-                                                    data-bs-dismiss="modal">
-                                                    <i class="fa-solid fa-xmark fs-5 text-dark"></i>
-                                                </button>
-                                                <div class="card border-0 shadow-sm">
-                                                    <img src="{{ asset('img/logo.png') }}" class="card-img-top"
-                                                        style="max-height:180px; object-fit:contain; padding:1rem;">
-                                                    <div class="card-body px-4 pt-4 pb-4">
-                                                        <h5 class="card-title fw-bold mb-2">{{ $d->nama_rd }}</h5>
-                                                        <p class="mb-1"><strong>Device:</strong>
-                                                            {{ $d->device->nama_dev ?? '-' }}</p>
-                                                        <p class="mb-1"><strong>IPAL:</strong>
-                                                            {{ $d->ipal->nama ?? '-' }}</p>
-                                                        <p class="mb-1"><strong>Lokasi:</strong>
-                                                            {{ $d->lokasi->nama_lok ?? '-' }}</p>
-                                                        <p class="mb-1"><strong>Status:</strong>
-                                                            {{ $d->status ? 'ON' : 'OFF' }}</p>
-                                                        <p class="mb-1"><strong>Keterangan:</strong> {{ $d->ket }}
-                                                        </p>
-                                                        <div class="text-end mt-3">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                        </div>
+                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-md modal-dialog-centered">
+                                    <div class="modal-content rounded-4">
+                                        <div class="modal-body position-relative p-0">
+                                            <button type="button"
+                                                class="btn btn-light position-absolute top-0 end-0 m-2 shadow-sm rounded-circle"
+                                                data-bs-dismiss="modal">
+                                                <i class="fa-solid fa-xmark fs-5 text-dark"></i>
+                                            </button>
+                                            <div class="card border-0 shadow-sm">
+                                                <img src="{{ asset('img/logo.png') }}" class="card-img-top"
+                                                    style="max-height:180px; object-fit:contain; padding:1rem;">
+                                                <div class="card-body px-4 pt-4 pb-4">
+                                                    <h5 class="card-title fw-bold mb-3">{{ $d->nama_rd }}</h5>
+                                                    
+                                                    <div class="row mb-2">
+                                                        <div class="col-4 fw-bold">Device</div>
+                                                        <div class="col-8">: {{ $d->device->nama_dev ?? '-' }}</div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-4 fw-bold">IPAL</div>
+                                                        <div class="col-8">: {{ $d->ipal->nama ?? '-' }}</div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col-4 fw-bold">Lokasi</div>
+                                                        <div class="col-8">: {{ $d->lokasi->nama ?? '-' }}</div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-4 fw-bold">Status</div>
+                                                        <div class="col-8">: {{ $d->status ? 'ON' : 'OFF' }}</div>
+                                                    </div>
+                                                    
+                                                    <div class="border-top pt-3 mb-3">
+                                                        <p>{{ $d->ket }}</p>
+                                                    </div>
+                                                    
+                                                    <div class="text-end mt-3">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                {{-- Modal Edit --}}
                                 {{-- Modal Edit --}}
                                 <div class="modal fade" id="editRegdevModal-{{ $d->id_rd }}"
                                     data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -290,7 +301,7 @@
                                                             @foreach ($lokasis as $lok)
                                                                 <option value="{{ $lok->id_lok }}"
                                                                     {{ $d->id_lok == $lok->id_lok ? 'selected' : '' }}>
-                                                                    {{ $lok->nama_lok }}
+                                                                    {{ $lok->nama }}
                                                                 </option>
                                                             @endforeach
                                                         </select>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IpalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Auth\LoginRegisterController;
@@ -7,6 +8,8 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\RegDevController;
+use App\Http\Controllers\LocationController;
+
 /*
 |--------------------------------------------------------------------------
 | AUTH Routes (Login & Register)
@@ -70,4 +73,27 @@ Route::put('/register-device/{id_rd}', [RegDevController::class, 'update'])->nam
 Route::delete('/register-device/{id_rd}', [RegDevController::class, 'destroy'])->name('regdev.destroy');
 Route::get('/register-device/{id_rd}', [RegDevController::class, 'show'])->name('regdev.show');
 
+/*
+|--------------------------------------------------------------------------
+| Ipal Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('ipal')->group(function () {
+    Route::get('/', [IpalController::class, 'index'])->name('ipal.index');
+    Route::post('/', [IpalController::class, 'store'])->name('ipal.store');
+    Route::put('/{id_ipal}', [IpalController::class, 'update'])->name('ipal.update');
+    Route::delete('/{id_ipal}', [IpalController::class, 'destroy'])->name('ipal.destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Location Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('location')->group(function () {
+    Route::get('/', [LocationController::class, 'index'])->name('location.index');
+    Route::post('/', [LocationController::class, 'store'])->name('location.store');
+    Route::put('/{id_lok}', [LocationController::class, 'update'])->name('location.update');
+    Route::delete('/{id_lok}', [LocationController::class, 'destroy'])->name('location.destroy');
+});
 

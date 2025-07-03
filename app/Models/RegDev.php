@@ -36,6 +36,6 @@ class RegDev extends Model
 
     public function lokasi()
     {
-        return $this->belongsTo(Lokasi::class, 'id_lok', 'id_lok');
+        return $this->belongsTo(Location::class, 'id_lok', 'id_lok');
     }
 }
